@@ -1,3 +1,8 @@
 env/
 .vscode/
 .python-version
+olist.db
+.pytest_cache/
+tests/__pycache__/
+dataset/
+src/__pycache__/
