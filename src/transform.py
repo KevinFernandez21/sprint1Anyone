@@ -200,8 +200,9 @@ def query_freight_value_weight_relationship(database: Engine) -> QueryResult:
     # Store the result in the `aggregations` variable.
     aggregations = delivered.groupby("order_id"
         ).agg(
-            sum_freight_value = ("freight_value", "sum"),
-            sum_product_weight = ("product_weight_g", "sum"),
+            order_id=("order_id", "first"),
+            freight_value = ("freight_value", "sum"),
+            product_weight_g = ("product_weight_g", "sum"),
         )
 
     # Keep the code below as it is, this will return the result from
@@ -270,7 +271,7 @@ def query_orders_per_day_and_holidays_2017(database: Engine) -> QueryResult:
             "order_count": order_purchase_ammount_per_date["order_count"],
             "date": order_purchase_ammount_per_date.index,
             "holiday": order_purchase_ammount_per_date.index.isin(
-                holidays["date"].dt.date
+                pd.to_datetime(holidays["date"]).dt.date.values
             ),
         })
 
