@@ -6,3 +6,4 @@ olist.db
 tests/__pycache__/
 dataset/
 src/__pycache__/
+test.ipynb
